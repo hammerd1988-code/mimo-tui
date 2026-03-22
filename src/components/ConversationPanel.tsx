@@ -1,6 +1,10 @@
 import { Box, Text } from "ink";
 
-import { APP_BACKGROUND_COLOR, CONVERSATION_HEIGHT } from "@/constants/ui";
+import {
+  APP_BACKGROUND_COLOR,
+  CONVERSATION_HEIGHT,
+  CONVERSATION_PANEL_WIDTH_PERCENT,
+} from "@/constants/ui";
 import { ConversationRow } from "@/types/mimo";
 
 const isTerminalControlCharacter = (character: string) => {
@@ -73,7 +77,7 @@ export const ConversationPanel = ({
     flexDirection="column"
     height={CONVERSATION_HEIGHT}
     paddingX={1}
-    width={fullWidth ? "100%" : "76%"}
+    width={fullWidth ? "100%" : CONVERSATION_PANEL_WIDTH_PERCENT}
   >
     <Box
       backgroundColor={APP_BACKGROUND_COLOR}

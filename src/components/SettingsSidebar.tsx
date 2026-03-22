@@ -1,6 +1,6 @@
 import { Box, Text } from "ink";
 
-import { APP_BACKGROUND_COLOR } from "@/constants/ui";
+import { APP_BACKGROUND_COLOR, SIDEBAR_WIDTH_PERCENT } from "@/constants/ui";
 import {
   ConversationId,
   ConversationSummary,
@@ -37,7 +37,7 @@ export const SettingsSidebar = ({
   <Box
     backgroundColor={APP_BACKGROUND_COLOR}
     flexDirection="column"
-    width="23%"
+    width={SIDEBAR_WIDTH_PERCENT}
   >
     <Box
       backgroundColor={APP_BACKGROUND_COLOR}

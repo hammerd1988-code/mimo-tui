@@ -23,9 +23,11 @@ import { SettingsSidebar } from "@/components/SettingsSidebar";
 import { Spinner } from "@/components/Spinner";
 import {
   APP_BACKGROUND_COLOR,
+  CONVERSATION_PANEL_WIDTH_RATIO,
   CONVERSATION_HEIGHT,
   CONVERSATION_HELP_TEXT,
   CONVERSATION_STATIC_LINES,
+  VISIBLE_HISTORY_ITEMS,
 } from "@/constants/ui";
 import { clamp, formatNumber, toTitleCase, wrapText } from "@/helpers/format";
 import {
@@ -69,8 +71,6 @@ import {
   Settings,
   TranscriptEntry,
 } from "@/types/mimo";
-
-const VISIBLE_HISTORY_ITEMS = 5;
 
 export const App = () => {
   const { exit } = useApp();
@@ -231,7 +231,9 @@ export const App = () => {
     setSelectedSetting((current) => Math.min(current, settingKeys.length - 1));
   }, [settingKeys.length]);
 
-  const conversationPanelWidthRatio = conversationFocusMode ? 1 : 0.72;
+  const conversationPanelWidthRatio = conversationFocusMode
+    ? 1
+    : CONVERSATION_PANEL_WIDTH_RATIO;
 
   const conversationContentWidth = Math.max(
     32,
@@ -784,7 +786,7 @@ export const App = () => {
     <Box backgroundColor={APP_BACKGROUND_COLOR} flexDirection="column">
       <HeaderBar focusLabel={toTitleCase(focus)} />
 
-      <Box backgroundColor={APP_BACKGROUND_COLOR}>
+      <Box backgroundColor={APP_BACKGROUND_COLOR} width="100%">
         <ConversationPanel
           focused={focus === "conversation"}
           fullWidth={conversationFocusMode}

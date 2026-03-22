@@ -9,7 +9,8 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE.txt"
+    "LICENSE.txt",
+    "mimo-tui.png"
   ],
   "type": "module",
   "scripts": {

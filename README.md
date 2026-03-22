@@ -4,6 +4,10 @@
 
 TypeScript terminal UI for chatting with MiMo models through Xiaomi's OpenAI-compatible API.
 
+## Screenshot
+
+![Screenshot](./mimo-tui.png)
+
 ## Features
 
 - Interactive terminal chat UI built with `Ink`
