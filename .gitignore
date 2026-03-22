@@ -1,0 +1,6 @@
+node_modules
+.env
+dist
+.tsbuildinfo
+chat_context.db
+coverage
