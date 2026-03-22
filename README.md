@@ -240,6 +240,7 @@ npm run type-check
 Distributed under `GPL-3.0`. See `LICENSE.txt`.
 
 <!-- Stargazers generated automatically with npx @titenq/stargazers -->
+
 ## ⭐ Stargazers
 
 This repository has no stargazers yet. Be the first!

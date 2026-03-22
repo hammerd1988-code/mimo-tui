@@ -435,6 +435,57 @@ describe("conversation rendering", () => {
     );
   });
 
+  it("renders strong inline markdown inside list items wrapped by text tokens", () => {
+    markedLexerMock.mockReturnValue([
+      {
+        type: "list",
+        ordered: false,
+        items: [
+          {
+            text: "**Conversação geral**: exemplo",
+            tokens: [
+              {
+                type: "text",
+                text: "**Conversação geral**: exemplo",
+                tokens: [
+                  {
+                    type: "strong",
+                    tokens: [{ type: "text", text: "Conversação geral" }],
+                  },
+                  { type: "text", text: ": exemplo" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+
+    const rows = createConversationRows({
+      entry: {
+        id: 17,
+        role: "assistant",
+        text: "list inline markdown",
+      },
+      isLoading: false,
+      width: 80,
+    });
+
+    const segments = rows.flatMap((row) => row.segments);
+
+    expect(
+      segments.some(
+        (segment) => segment.text.includes("Conversação geral") && segment.bold,
+      ),
+    ).toBe(true);
+
+    expect(
+      segments.some((segment) =>
+        segment.text.includes("**Conversação geral**"),
+      ),
+    ).toBe(false);
+  });
+
   it("handles blockquotes with line breaks, empty list items and code blocks without text", () => {
     markedLexerMock.mockReturnValue([
       {

@@ -318,6 +318,32 @@ const renderInlineTokens = (
   return segments;
 };
 
+const extractListItemInlineTokens = (item: MarkdownToken): MarkdownToken[] => {
+  const queue = [...(item.tokens ?? [])];
+
+  while (queue.length > 0) {
+    const token = queue.shift();
+
+    if (!token) {
+      continue;
+    }
+
+    if (
+      (token.type === "paragraph" || token.type === "text") &&
+      Array.isArray(token.tokens) &&
+      token.tokens.length > 0
+    ) {
+      return token.tokens as MarkdownToken[];
+    }
+
+    if (Array.isArray(token.tokens) && token.tokens.length > 0) {
+      queue.unshift(...token.tokens);
+    }
+  }
+
+  return [];
+};
+
 const renderMarkdownRows = (text: string, keyPrefix: string, width: number) => {
   const rows: ConversationRow[] = [];
 
@@ -392,11 +418,7 @@ const renderMarkdownRows = (text: string, keyPrefix: string, width: number) => {
       case "list":
         for (const [itemIndex, item] of (token.items ?? []).entries()) {
           const marker = token.ordered ? `${itemIndex + 1}. ` : "• ";
-
-          const itemTokens =
-            item.tokens?.find(
-              (child: MarkdownToken) => child.type === "paragraph",
-            )?.tokens ?? [];
+          const itemTokens = extractListItemInlineTokens(item as MarkdownToken);
 
           const itemSegments =
             itemTokens.length > 0
